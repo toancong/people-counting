@@ -92,8 +92,9 @@ while 1:
     # dn.rgbgr_image(dnimg)
     # r = dn.detect2(net, meta, dnimg)
     # print(r)
-    cv.imshow('Result', frame)
-    continue
+    # cv.imshow('Result', frame)
+    # continue
+
     gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
     gray = cv.GaussianBlur(gray, (11, 11), 0)
     fgframe = fgbg.apply(gray)

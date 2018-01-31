@@ -1,0 +1,31 @@
+#! /bin/bash
+
+set -e
+
+COMMAND=$@
+
+if ! nc -z localhost 6000 ; then
+    echo running socat
+    socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\" &
+fi
+
+sleep 1s
+
+while ! nc -z localhost 6000 ; do
+    echo waiting for socat to open port 6000
+    sleep 5s
+done
+
+echo starting XQuartz
+open -a XQuartz
+
+ip=`ifconfig en0 | grep 'inet ' | awk '{print $2}'`
+xhost +${ip}
+
+echo RUN docker-compose run --rm app $COMMAND
+docker-compose run --rm app $COMMAND || true
+
+echo stopping XQuartz
+ps aux | grep -v grep | grep -i XQuartz | awk '{print $2;}' | xargs kill -TERM
+
+echo done

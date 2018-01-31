@@ -1,0 +1,19 @@
+version: "3"
+services:
+  app:
+    image: toancong/cv:darknet
+    volumes:
+      - .:/darknet/app
+    environment:
+      - DISPLAY=192.168.1.177:0
+    devices:
+    - /dev/ttys000:/dev/video0
+    - /dev/ttys001:/dev/video1
+    - /dev/ttys002:/dev/video2
+    privileged: true
+    working_dir: /darknet
+    command:
+    - /bin/bash
+    - -c
+    - |
+      python app/app.py

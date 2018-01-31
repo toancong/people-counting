@@ -19,8 +19,7 @@ done
 echo starting XQuartz
 open -a XQuartz
 
-ip=`ifconfig en0 | grep 'inet ' | awk '{print $2}'`
-xhost +${ip}
+xhost +localhost
 
 echo RUN docker-compose run --rm app $COMMAND
 docker-compose run --rm app $COMMAND || true

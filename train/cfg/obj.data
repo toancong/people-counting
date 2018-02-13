@@ -1,0 +1,5 @@
+classes= 1
+train  = /darknet/app/train/train.txt
+valid  = /darknet/app/train/test.txt
+names = /darknet/app/train/cfg/obj.names
+backup = /darknet/app/train/backup

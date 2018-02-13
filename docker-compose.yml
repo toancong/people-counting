@@ -4,16 +4,19 @@ services:
     image: toancong/cv:darknet
     volumes:
       - .:/darknet/app
+      - ./train/Images:/darknet/Images
+      - ./train/Labels:/darknet/Labels
+      - ./train/Examples:/darknet/Examples
+      # - ./train/bblt/main.py:/BBox-Label-Tool/main.py
     environment:
       - DISPLAY=docker.for.mac.host.internal:0
-    devices:
-    - /dev/ttys000:/dev/video0
-    - /dev/ttys001:/dev/video1
-    - /dev/ttys002:/dev/video2
-    privileged: true
     working_dir: /darknet
     command:
     - /bin/bash
     - -c
     - |
       python app/app.py
+  se:
+    image: toancong/feup:node6
+    volumes:
+      - .:/data/www/current

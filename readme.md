@@ -67,6 +67,54 @@ docker-compose run --rm app ./darknet detector train app/train/cfg/voc.data cfg/
 docker-compose run --rm app ./darknet detector train app/train/cfg/voc.data cfg/yolo-voc.cfg app/train/backup/yolo-voc.backup
 ```
 
+* Example some detect
+```
+sh run darknet detect app/train/cfg/yolo-voc.cfg app/train/backup/yolo-voc.backup app/train/test.jpg -thresh 0.9
+sh run darknet detect cfg/yolo.cfg yolo.weights app/train/test.jpg
+sh run darknet detect cfg/yolo.cfg app/train/backup/yolo-voc_400.weights app/train/test.jpg
+```
+
+## Train from scratch
+Learn more: https://timebutt.github.io/static/how-to-train-yolov2-to-detect-custom-objects/
+
+1. Prepare dataset for training
+Use crawler to search image from google
+```
+docker-compose run --rm se npm install
+docker-compose run --rm -T se node crawler
+```
+
+2. Run BBox Tool to label image
+```
+sh run bblt
+```
+
+- Name folder with 001, 002, .. respectively with class
+- Subfolder in Examples, Images, Labels with 001, 002, .. is required
+- See more in tutorial
+
+3. Run convert format from BBox to Yolo
+```
+docker-compose run --rm app bash -c "cd app/train && python bblt2yolo.py"
+```
+
+4. Spliting for training set and test set
+```
+docker-compose run --rm app bash -c "cd app/train && python split.py"
+```
+
+5. Configuration yolo
+
+6. Run train
+```
+docker-compose run --rm app ./darknet detector train app/train/cfg/obj.data app/train/cfg/obj.cfg app/train/darknet19_448.conv.23
+```
+
+7. Test
+```
+sh run darknet detector test app/train/cfg/obj.data app/train/cfg/obj.cfg app/train/backup/obj.backup app/train/Images/001/1-0.jpeg -thresh 0.9
+```
+
 ## NOTE:
 có 1 vài output quan trọng trong quá trình train:
  - Region Avg IOU: 0.164715 càng tiến về 1 càng tốt, tức là tỉ lệ giao hợp càng gần 100% càng tốt

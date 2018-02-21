@@ -53,13 +53,11 @@ I updated the config file in train/cfg/voc.data and volume it into docker
 
 4. Download Pretrained Convolutional Weights
 Download file to `train` folder
-```
-wget https://pjreddie.com/media/files/darknet19_448.conv.23
-```
+I've downloaded already darknet19_448.conv.23 file to /darknet
 
 5. Train The Model
 ```
-docker-compose run --rm app ./darknet detector train app/train/cfg/voc.data cfg/yolo-voc.cfg app/train/darknet19_448.conv.23
+docker-compose run --rm app ./darknet detector train app/train/cfg/voc.data cfg/yolo-voc.cfg darknet19_448.conv.23
 ```
 
 * Train from a checkpoint
@@ -107,7 +105,12 @@ docker-compose run --rm app bash -c "cd app/train && python split.py"
 
 6. Run train
 ```
-docker-compose run --rm app ./darknet detector train app/train/cfg/obj.data app/train/cfg/obj.cfg app/train/darknet19_448.conv.23
+docker-compose run --rm app ./darknet detector train app/train/cfg/obj.data app/train/cfg/obj.cfg darknet19_448.conv.23
+```
+
+ Or continue train from a checkpoint
+```
+docker-compose run --rm app ./darknet detector train app/train/cfg/obj.data app/train/cfg/obj.cfg app/train/backup/obj.backup
 ```
 
 7. Test

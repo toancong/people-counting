@@ -1,0 +1,25 @@
+{
+  "name": "image-crawler",
+  "version": "1.0.0",
+  "description": "### For MacOS if you want to display GUI in python",
+  "main": "index.js",
+  "dependencies": {
+    "async": "^2.6.0",
+    "google-images": "^2.1.0",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toancong/people-counting.git"
+  },
+  "author": "Toan Pham",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/toancong/people-counting/issues"
+  },
+  "homepage": "https://github.com/toancong/people-counting#readme"
+}

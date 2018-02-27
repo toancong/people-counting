@@ -90,18 +90,23 @@ sh run bblt
 - Name folder with 001, 002, .. respectively with class
 - Subfolder in Examples, Images, Labels with 001, 002, .. is required
 - See more in tutorial
+- BBox only see images with '.JPEG' ext
 
 3. Run convert format from BBox to Yolo
 ```
 docker-compose run --rm app bash -c "cd app/train && python bblt2yolo.py"
 ```
+The output is a folder named Labels/voc/<class>/ what list bounding box of objects in txt files.
+Copy the files to your Images/<class>/ folder. We will have images and txt file in same together
 
 4. Spliting for training set and test set
 ```
 docker-compose run --rm app bash -c "cd app/train && python split.py"
 ```
+The output is 2 txt file: train.txt and test.txt. Name is itself explanation
 
 5. Configuration yolo
+Configed them in cfg/object*
 
 6. Run train
 ```

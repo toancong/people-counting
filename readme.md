@@ -91,6 +91,7 @@ sh run bblt
 - Subfolder in Examples, Images, Labels with 001, 002, .. is required
 - See more in tutorial
 - BBox only see images with '.JPEG' ext
+- `rename 's/\.jpeg/\.jpg/' *.jpeg && rename 's/\.jpg/\.JPEG/' *.jpg` Rename from jpeg to JPEG
 
 3. Run convert format from BBox to Yolo
 ```
